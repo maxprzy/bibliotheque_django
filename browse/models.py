@@ -18,7 +18,7 @@ class Author(models.Model):
 
 class Category(models.Model):
     category_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=10)
+    name = models.CharField(max_length=20)
 
     def __str__(self):
         return self.name
@@ -45,7 +45,7 @@ class Books(models.Model):
     title = models.CharField(max_length=200)
     is_borrowed = models.BooleanField(default=False)
     return_date = models.DateField(blank=True, null=True)
-    ref = models.CharField(max_length=6)
+    ref = models.CharField(max_length=6, blank=True, null=True)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     format = models.ForeignKey(Format, on_delete=models.CASCADE)
     language = models.ForeignKey(Language, on_delete=models.CASCADE)
@@ -65,3 +65,15 @@ class Comic(Books):
 
     def __str__(self):
         return self.title
+
+
+class Users(models.Model):
+    login = models.CharField(max_length=22, blank=True, null=True)
+    name = models.CharField(max_length=20)
+    firstname = models.CharField(max_length=20)
+    password = models.CharField(max_length=20)
+    rank = models.IntegerField(default=1)
+    borrow = models.ManyToManyField(Books, blank=True, null=True)
+
+    def __str__(self):
+        return self.name[0].lower() + "." + self.firstname.lower()
