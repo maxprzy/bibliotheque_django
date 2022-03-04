@@ -46,6 +46,7 @@ class Books(models.Model):
     is_borrowed = models.BooleanField(default=False)
     return_date = models.DateField(blank=True, null=True)
     ref = models.CharField(max_length=6, blank=True, null=True)
+    desc = models.TextField(max_length=10000, blank=True, null=True)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     format = models.ForeignKey(Format, on_delete=models.CASCADE)
     language = models.ForeignKey(Language, on_delete=models.CASCADE)
