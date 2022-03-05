@@ -27,7 +27,7 @@
 
 <body>
     <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <p class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="{% url 'browse:index' %}">Poudlard</p>
+        <p class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Poudlard</p>
     </header>
     <div class="row">
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
@@ -42,33 +42,18 @@
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                     <thead>
-                        <td>REF</td>
-                        <td>Titre</td>
-                        <td>Auteur</td>
-                        <td>Catégorie</td>
-                        <td>Genre</td>
-                        <td>Langue</td>
-                        <td>Date de retour</td>
-                        <td>Emprunter</td>
+                        <td>Nom</td>
+                        <td>Prénom</td>
                     </thead>
-                    {% for book in all_books %}
+                    {% for author in all_authors %}
                     <tr>
-                        <td>{{book.ref}}</td>
-                        <td><a href="/browse/book/{{ book.book_id }}/">{{book.title}}</a></td>
-                        {% if book.format.name == "B.D" %}
-                            <td>{{book.author.name}}</td>
+                        <td><a href="/browse/author/{{ author.author_id }}">{{author.name}}</a></td>
+
+                        {% if author.firstname == None %}
+                            <td></td>
                         {% else %}
-                            <td>{{book.author.firstname}} {{book.author.name}}</td>
+                            <td>{{author.firstname}}</td>
                         {% endif %}
-                        <td>{{book.format.name}}</td>
-                        <td>{{book.category.name}}</td>
-                        <td>{{book.language.name}}</td>
-                        {% if book.is_borrowed == False %}
-                            <td>Disponible</td>
-                        {% else %}
-                            <td>{{ book.return_date }}</td>
-                        {% endif %}
-                        <td><input type="button" value="emprunter"></td>
                     </tr>
                     {% endfor %}
                 </table>
