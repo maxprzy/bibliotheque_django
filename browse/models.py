@@ -9,6 +9,13 @@ class Author(models.Model):
     name = models.CharField(max_length=20)
     firstname = models.CharField(blank=True, null=True, max_length=20)
 
+    def get_qte_books(self, books):
+        c = 0
+        for i in books:
+           if i.author == self.author_id:
+               c += 1
+        return c
+
     def __str__(self):
         if self.firstname:
             chaine = self.name + " " + self.firstname
