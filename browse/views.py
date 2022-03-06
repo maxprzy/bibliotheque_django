@@ -3,6 +3,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.template import loader
 from django.urls import reverse
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
 
 from .models import *
 
@@ -65,3 +67,43 @@ def borrow(request, book_id):
     template = loader.get_template('browse/borrowed.html')
     context = {'book':book}
     return HttpResponse(template.render(context, request))
+
+def register(request):
+    return render(request, 'browse/register.html')
+
+def registered(request):
+    name = request.POST['user_name']
+    firstname = request.POST['user_firstname']
+    pwd = request.POST['user_pwd']
+    email = request.POST['user_email']
+    username = firstname[0].lower() + "." + name.lower()
+    user = User.objects.create_user(username, email, pwd)
+    user.last_name = name
+    user.first_name = firstname
+    user.save()
+    template = loader.get_template('browse/registered.html')
+    context = {'username': username, 'email': email, 'firstname': firstname}
+    return HttpResponse(template.render(context, request))
+
+
+def my_login(request):
+    return render(request, 'browse/login.html')
+
+
+def logged(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(request, username=username, password=password)
+    template = loader.get_template('browse/logged.html')
+    invalid_template = loader.get_template('browse/error_log.html')
+    context = {'user': user}
+    if user is not None:
+        login(request, user)
+        return HttpResponse(template.render(context, request))
+    else:
+        return HttpResponse(invalid_template.render(context, request))
+
+def my_logout(request):
+    logout(request)
+    return render(request, 'browse/logout.html')
+

@@ -1,4 +1,5 @@
-from django.urls import path
+from django.urls import include, path
+from django.contrib.auth import views as auth_views
 from . import views
 
 app_name = 'browse'
@@ -12,4 +13,9 @@ urlpatterns = [
     path('category/<int:category_id>/', views.category, name="category"),
     path('format/<int:format_id>/', views.format, name="format"),
     path('book/<int:book_id>/borrow/', views.borrow, name="borrow"),
+    path('accounts/register/', views.register, name="register"),
+    path('accounts/registered/', views.registered, name='registered'),
+    path('accounts/login/', views.my_login, name='login'),
+    path('accounts/logged/', views.logged, name='logged'),
+    path('accounts/logout/', views.my_logout, name='logout'),
 ]
