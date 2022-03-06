@@ -1,6 +1,8 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render
 from django.template import loader
+from django.urls import reverse
 
 from .models import *
 
@@ -55,6 +57,11 @@ def format(request, format_id):
     context = {'books_by_format': q}
     return HttpResponse(template.render(context, request))
 
-
-
-
+def borrow(request, book_id):
+    book = get_object_or_404(Books, book_id=book_id)
+    book.is_borrowed = True
+    book.return_date = datetime.date.today() + datetime.timedelta(days=15)
+    book.save()
+    template = loader.get_template('browse/borrowed.html')
+    context = {'book':book}
+    return HttpResponse(template.render(context, request))

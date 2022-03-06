@@ -55,14 +55,10 @@
                 <tr>
                     <td>{{book.ref}}</td>
                     <td><a href="/browse/book/{{ book.book_id }}/">{{book.title}}</a></td>
-                    {% if book.format.name == "B.D" %}
-                    <td>{{book.author.name}}</td>
-                    {% else %}
-                    <td>{{book.author.firstname}} {{book.author.name}}</td>
-                    {% endif %}
-                    <td>{{book.format.name}}</td>
-                    <td>{{book.category.name}}</td>
-                    <td>{{book.language.name}}</td>
+                    <td>{{book.author}}</td>
+                    <td>{{book.format}}</td>
+                    <td>{{book.category}}</td>
+                    <td>{{book.language}}</td>
                     {% if book.is_borrowed == False %}
                     <td>Disponible</td>
                     {% else %}

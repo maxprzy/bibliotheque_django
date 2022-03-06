@@ -27,9 +27,9 @@
 </head>
 
 <body>
-<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-    <p class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="{% url 'browse:index' %}">Poudlard</p>
-</header>
+    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+                                                                                       <p class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="{% url 'browse:index' %}">Poudlard</p>
+                                                                                       </header>
     <div class="row">
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
                                                                                                 <ul class="nav flex-column mb-2">
@@ -40,32 +40,14 @@
                                                                                                 </ul>
                                                                                                 </nav>
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" id="centre">
-            <div id="entete">
-                <div id="texte">
-                    <h1>{{book.title}}</h1>
-                    <div id="content">
-                        <div id="desc">
-                            <p>{{book.desc}}</p>
-                        </div>
-                        <div id="infos">
-                            <p>Auteur : {{book.author}}</p>
-                            <p>Format : {{book.format}}</p>
-                            <p>Catégorie : {{book.category}}</p>
-                            {% if book.is_borrowed == False %}
-                                <p>Disponible à l'emprunt</p>
-                            {% else %}
-                                {% language 'fr' %}
-                                <p>Non disponible, de retour le {{book.return_date|date:'d F Y'}}</p>
-                                {% endlanguage %}
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-                <img src="{% static 'browse/images/' %}{{book.image}}">
-            </div>
-            <form id="borrow" action="{% url 'browse:borrow' book.book_id %}">
-                <input type="submit" value="emprunter">
-            </form>
+            <h1>{{book.title}}</h1>
+
+            <p> Vous venez d'emprunter {{book.title}} de {{book.author}}</p>
+            <p> Il sera a rendre avant le
+                {% language 'fr' %}
+                    <strong>{{book.return_date|date:'d F Y'}}</strong>
+                {% endlanguage %}
+            </p>
         </main>
     </div>
 </body>
