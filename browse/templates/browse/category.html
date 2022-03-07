@@ -25,7 +25,13 @@
             {% else %}
             <td>{{ book.return_date }}</td>
             {% endif %}
-            <td><input type="button" value="emprunter"></td>
+            <td>
+                {% if book.is_borrowed == False %}
+                <form id="borrow" action="{% url 'browse:borrow' book.book_id %}">
+                    <input type="submit" value="emprunter">
+                </form>
+                {% endif %}
+            </td>
         </tr>
         {% endfor %}
     </table>
