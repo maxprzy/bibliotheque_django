@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 import random
 import datetime
@@ -54,6 +55,8 @@ class Books(models.Model):
     format = models.ForeignKey(Format, on_delete=models.CASCADE)
     language = models.ForeignKey(Language, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    borrowuser = models.ManyToManyField(User, blank=True, null=True)
+
 
     def create_ref(self):
         self.ref = self.title[0] + self.author.name[0] + str(random.randint(1000, 9999))

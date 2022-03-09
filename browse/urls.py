@@ -18,4 +18,6 @@ urlpatterns = [
     path('accounts/login/', views.my_login, name='login'),
     path('accounts/logged/', views.logged, name='logged'),
     path('accounts/logout/', views.my_logout, name='logout'),
+    path('accounts/profile/', views.profile, name='profile'),
+    path('accounts/goback/<int:book_id>/', views.goback, name='goback'),
 ]

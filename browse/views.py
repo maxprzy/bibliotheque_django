@@ -63,6 +63,7 @@ def borrow(request, book_id):
     book = get_object_or_404(Books, book_id=book_id)
     book.is_borrowed = True
     book.return_date = datetime.date.today() + datetime.timedelta(days=15)
+    book.borrowuser.add(request.user)
     book.save()
     template = loader.get_template('browse/borrowed.html')
     context = {'book':book}
@@ -106,4 +107,19 @@ def logged(request):
 def my_logout(request):
     logout(request)
     return render(request, 'browse/logout.html')
+
+def profile(request):
+    borrows = Books.objects.filter(borrowuser=request.user)
+    template = loader.get_template('browse/profile.html')
+    context = {'borrows': borrows, 'qte': len(borrows)}
+    return HttpResponse(template.render(context, request))
+
+
+def goback(request, book_id):
+    book = get_object_or_404(Books, book_id=book_id)
+    book.is_borrowed = False
+    book.return_date = None
+    book.borrowuser.remove(request.user)
+    book.save()
+    return render(request, 'browse/goback.html')
 

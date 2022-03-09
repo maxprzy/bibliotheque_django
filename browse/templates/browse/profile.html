@@ -1,5 +1,21 @@
 {% extends "browse/index.html" %}
-{% block content %}
 {% load static %}
 {% load i18n %}
+{% block content %}
+<h1>{{user.firstname}} {{user.name}}</h1>
+<p>Tu as actuellement {{qte}} livre(s) en ta possession</p>
+{% if  qte != 0 %}
+    <ul>
+    {% for book in borrows %}
+        {% language 'fr' %}
+        <li>
+            <a href="/browse/book/{{ book.book_id }}/">{{book.title}}</a> de {{book.author}} à rendre avant le {{book.return_date|date:'d F Y'}}
+            <form id="borrow" action="{% url 'browse:goback' book.book_id %}">
+                <input type="submit" value="rendre">
+            </form>
+        </li>
+        {% endlanguage %}
+    {% endfor %}
+    </ul>
+{% endif %}
 {% endblock %}
