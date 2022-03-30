@@ -11,7 +11,7 @@ from .models import *
 # Create your views here.
 
 def index(request):
-    all_books = Books.objects.order_by('title')
+    all_books = Book.objects.order_by('title')
     template = loader.get_template('browse/index.html')
     context = {'all_books':all_books}
     return HttpResponse(template.render(context,request))
