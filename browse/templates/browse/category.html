@@ -17,7 +17,7 @@
         {% for book in books_by_category %}
         <tr>
             <td>{{book.ref}}</td>
-            <td><a href="/browse/book/{{ book.book_id }}/">{{book.title}}</a></td>
+            <td><a href="/browse/books/{{ book.book_id }}/">{{book.title}}</a></td>
             <td>{{book.author}}</td>
             <td>{{book.format}}</td>
             <td>{{book.category}}</td>

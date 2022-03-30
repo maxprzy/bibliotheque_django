@@ -9,7 +9,7 @@
     {% for book in borrows %}
         {% language 'fr' %}
         <li>
-            <a href="/browse/book/{{ book.book_id }}/">{{book.title}}</a> de {{book.author}} à rendre avant le {{book.return_date|date:'d F Y'}}
+            <a href="/browse/books/{{ book.book_id }}/">{{book.title}}</a> de {{book.author}} à rendre avant le {{book.return_date|date:'d F Y'}}
             <form id="borrow" action="{% url 'browse:goback' book.book_id %}">
                 <input type="submit" value="rendre">
             </form>

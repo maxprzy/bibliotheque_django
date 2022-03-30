@@ -14,7 +14,7 @@ class Author(models.Model):
 
     def __str__(self):
         if self.name:
-            chaine = self.firstname + " " + self.name
+            chaine = str(self.firstname) + " " + str(self.name)
             return chaine
         return self.firstname
 
