@@ -1,0 +1,6 @@
+Django>=3.0,<4.0
+psycopg2>=2.8
+psycopg2-binary
+uwsgi
+django-jenkins==0.16.4
+coverage==3.7.1
