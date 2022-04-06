@@ -1,0 +1,17 @@
+{% extends "browse/index.html" %}
+{% block content %}
+{% load static %}
+{% load i18n %}
+<div class="table-responsive">
+    <table class="table table-striped table-sm">
+        <thead>
+            <td>Format</td>
+        </thead>
+        {% for format in all_formats %}
+        <tr>
+            <td><a href="/browse/formats/{{format.format_id}}"> {{format.name}}</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

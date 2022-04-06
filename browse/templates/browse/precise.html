@@ -1,0 +1,31 @@
+{% extends "browse/index.html" %}
+{% block content %}
+{% load static %}
+{% load i18n %}
+<div id="entete">
+    <div id="texte">
+        <h1>{{book.title}}</h1>
+        <div id="content">
+            <div id="desc">
+                <p>{{book.desc}}</p>
+            </div>
+            <div id="infos">
+                <p>Auteur : {{book.author}}</p>
+                <p>Format : {{book.format}}</p>
+                <p>Catégorie : {{book.category}}</p>
+                {% if book.is_borrowed == False %}
+                    <p>Disponible à l'emprunt</p>
+                {% else %}
+                    {% language 'fr' %}
+                    <p>Non disponible, de retour le {{book.return_date|date:'d F Y'}}</p>
+                    {% endlanguage %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <img src="{% static 'browse/images/' %}{{book.image}}">
+</div>
+<form id="borrow" action="{% url 'browse:borrow' book.book_id %}">
+    <input type="submit" value="emprunter">
+</form>
+{% endblock %}

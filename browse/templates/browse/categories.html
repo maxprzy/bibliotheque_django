@@ -1,0 +1,15 @@
+{% extends "browse/index.html" %}
+{% block content %}
+<div class="table-responsive">
+    <table class="table table-striped table-sm">
+        <thead>
+            <td>Catégorie</td>
+        </thead>
+        {% for category in all_categories %}
+        <tr>
+            <td><a href="/browse/categories/{{category.category_id}}">{{category}}</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

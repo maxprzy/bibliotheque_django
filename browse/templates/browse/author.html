@@ -1,0 +1,39 @@
+{% extends "browse/index.html" %}
+{% block content %}
+<div class="table-responsive">
+    <table class="table table-striped table-sm">
+        <thead>
+        <td>REF</td>
+        <td>Titre</td>
+        <td>Auteur</td>
+        <td>Catégorie</td>
+        <td>Genre</td>
+        <td>Langue</td>
+        <td>Date de retour</td>
+        <td>Emprunter</td>
+        </thead>
+        {% for book in books_by_author %}
+        <tr>
+            <td>{{book.ref}}</td>
+            <td><a href="/browse/book/{{ book.book_id }}/">{{book.title}}</a></td>
+                <td>{{book.author}}</td>
+            <td>{{book.format}}</td>
+            <td>{{book.category}}</td>
+            <td>{{book.language}}</td>
+            {% if book.is_borrowed == False %}
+                <td>Disponible</td>
+            {% else %}
+                <td>{{ book.return_date }}</td>
+            {% endif %}
+            <td>
+                {% if book.is_borrowed == False %}
+                <form id="borrow" action="{% url 'browse:borrow' book.book_id %}">
+                    <input type="submit" value="emprunter">
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

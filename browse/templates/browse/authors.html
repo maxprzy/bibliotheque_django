@@ -1,0 +1,15 @@
+{% extends "browse/index.html" %}
+{% block content %}
+<div class="table-responsive">
+    <table class="table table-striped table-sm">
+        <thead>
+            <td>Auteurs</td>
+        </thead>
+        {% for author in all_authors %}
+        <tr>
+            <td><a href="/browse/authors/{{ author.author_id }}">{{author}}</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

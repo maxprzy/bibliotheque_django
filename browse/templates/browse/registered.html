@@ -1,0 +1,8 @@
+{% extends "browse/index.html" %}
+{% block content %}
+{% load static %}
+{% load i18n %}
+<p>Bienvenue {{firstname}}, pour vous connecter veuillez utiliser le login suivant :</p>
+<p><strong>{{username}}</strong></p>
+<p>Dans le cas ou vous oublieriez votre mot de passe votre adresse email <strong>{{email}}</strong> vous sera demandé pour le réinitialiser</p>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "browse/index.html" %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+<h1>{{book.title}}</h1>
+
+<p> Vous venez d'emprunter {{book.title}} de {{book.author}}</p>
+<p> Il sera a rendre avant le
+    {% language 'fr' %}
+        <strong>{{book.return_date|date:'d F Y'}}</strong>
+    {% endlanguage %}
+</p>
+{% endblock %}
