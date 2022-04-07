@@ -6,7 +6,7 @@ pipeline {
 		stage("build") {
 			
 			steps {
-				echo "building"
+				sh 'python manage.py migrate'
 			}
 		}
 
